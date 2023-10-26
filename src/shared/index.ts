@@ -1,0 +1,1 @@
+export { hashCognitoSecret } from './util';
