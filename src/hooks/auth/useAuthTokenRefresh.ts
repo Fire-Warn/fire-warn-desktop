@@ -8,7 +8,6 @@ export function useAutoTokenRefresh() {
 	const region: string = process.env.COGNITO_REGION || '';
 	const clientId: string = process.env.COGNITO_CLIENT_ID || '';
 	const clientSecret: string = process.env.COGNITO_CLIENT_SECRET || '';
-	console.log({ env: process.env, region, clientId, clientSecret });
 
 	const provider = useMemo(() => new CognitoIdentityProvider({ region }), [region]);
 

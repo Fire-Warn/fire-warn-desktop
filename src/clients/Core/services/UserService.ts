@@ -2,7 +2,8 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { RegisterUserRequest } from '../models/RegisterUserRequest';
+import type { CreateUserRequest } from '../models/CreateUserRequest';
+import type { UserListResponse } from '../models/UserListResponse';
 import type { UserResponse } from '../models/UserResponse';
 
 import type { CancelablePromise } from '../core/CancelablePromise';
@@ -16,14 +17,49 @@ export class UserService {
      * @returns UserResponse
      * @throws ApiError
      */
-    public static register(
-        requestBody: RegisterUserRequest,
+    public static createUser(
+        requestBody: CreateUserRequest,
     ): CancelablePromise<UserResponse> {
         return __request(OpenAPI, {
             method: 'POST',
-            url: '/users/register',
+            url: '/users',
             body: requestBody,
             mediaType: 'application/json',
+            errors: {
+                401: `Unauthorized`,
+            },
+        });
+    }
+
+    /**
+     * @param page
+     * @param rowsPerPage
+     * @param order
+     * @param orderBy
+     * @param filters
+     * @returns UserListResponse
+     * @throws ApiError
+     */
+    public static getAllUsers(
+        page: number,
+        rowsPerPage: number,
+        order?: 'ASC' | 'DESC',
+        orderBy?: 'user.first_name' | 'user.last_name' | 'user.created_at' | 'user.role',
+        filters?: Array<string>,
+    ): CancelablePromise<UserListResponse> {
+        return __request(OpenAPI, {
+            method: 'GET',
+            url: '/users',
+            query: {
+                'page': page,
+                'rowsPerPage': rowsPerPage,
+                'order': order,
+                'orderBy': orderBy,
+                'filters': filters,
+            },
+            errors: {
+                401: `Unauthorized`,
+            },
         });
     }
 

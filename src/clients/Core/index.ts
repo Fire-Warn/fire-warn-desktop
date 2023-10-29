@@ -7,7 +7,8 @@ export { CancelablePromise, CancelError } from './core/CancelablePromise';
 export { OpenAPI } from './core/OpenAPI';
 export type { OpenAPIConfig } from './core/OpenAPI';
 
-export type { RegisterUserRequest } from './models/RegisterUserRequest';
+export type { CreateUserRequest } from './models/CreateUserRequest';
+export type { UserListResponse } from './models/UserListResponse';
 export type { UserResponse } from './models/UserResponse';
 export type { UserRole } from './models/UserRole';
 

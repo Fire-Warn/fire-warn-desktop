@@ -4,4 +4,5 @@ export const entities = {
 	contextUser: 'CONTEXT_USER',
 
 	usersList: 'USERS_LIST',
+	me: 'ME',
 };

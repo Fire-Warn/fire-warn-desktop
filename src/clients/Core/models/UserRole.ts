@@ -3,4 +3,4 @@
 /* tslint:disable */
 /* eslint-disable */
 
-export type UserRole = 'Admin' | 'Regular';
+export type UserRole = 'Admin' | 'RegionalAdmin' | 'CommunityAdmin' | 'Volunteer';

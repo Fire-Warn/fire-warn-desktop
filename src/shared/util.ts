@@ -1,4 +1,4 @@
-import crypto from 'crypto';
+import crypto from 'crypto-browserify';
 
 export const hashCognitoSecret = (clientSecret: string, username: string, clientId: string) => {
 	return crypto

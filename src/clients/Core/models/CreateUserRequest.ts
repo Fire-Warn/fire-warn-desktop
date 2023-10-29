@@ -3,10 +3,15 @@
 /* tslint:disable */
 /* eslint-disable */
 
-export type RegisterUserRequest = {
+import type { UserRole } from './UserRole';
+
+export type CreateUserRequest = {
     firstName: string;
     lastName: string;
     email: string;
-    role: 'Admin' | 'Regular';
+    phone: string;
+    role: UserRole;
+    regionId: number;
+    communityId: number;
 };
 

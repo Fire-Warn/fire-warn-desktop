@@ -16,6 +16,9 @@ export const GlobalStyle = createGlobalStyle`
 		height: 100%;
 		margin: 0;
   }
+  #app {
+    height: 100%;
+  }
 	a {
 		text-decoration: none;
 	}
