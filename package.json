@@ -55,6 +55,7 @@
     "@mui/material": "^5.14.13",
     "@mui/styled-engine-sc": "^6.0.0-alpha.1",
     "@mui/styles": "^5.14.13",
+    "@mui/x-data-grid": "^6.17.0",
     "classnames": "^2.3.2",
     "crypto-browserify": "^3.12.0",
     "electron-squirrel-startup": "^1.0.0",

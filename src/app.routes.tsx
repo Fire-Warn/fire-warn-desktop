@@ -6,6 +6,7 @@ import { Routes } from 'react-router-dom';
 import { AuthContainer } from './components/AuthContainer';
 import { useRole } from './context/UserContext';
 import { UserRole } from './clients/Core';
+import AppWrapper from './components/AppWrapper';
 
 const NO_ROLE = 'NO_ROLE';
 
@@ -48,9 +49,10 @@ const allRoutes: RoutesConfig[] = [
 		],
 	},
 	{
-		path: appPaths.users,
+		path: '',
 		allowedRoles: ['Admin', 'RegionalAdmin', 'CommunityAdmin', 'Volunteer'],
-		element: <LazyUsers />,
+		element: <AppWrapper />,
+		children: [{ path: appPaths.users, element: <LazyUsers /> }],
 	},
 ];
 

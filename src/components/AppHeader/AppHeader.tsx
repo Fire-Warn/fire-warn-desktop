@@ -29,6 +29,7 @@ import {
 	MobileLogoWrapper,
 	AvatarButton,
 } from './AppHeader.styles';
+import { appPaths } from '../../app.routes';
 
 function AvatarPopover({ name }: { name: string }) {
 	const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
@@ -129,27 +130,21 @@ function Logo() {
 export default function AppHeader({
 	hideUser,
 	hideNavigation,
+	openSidebar,
 }: {
 	hideUser?: boolean;
 	hideNavigation?: boolean;
+	openSidebar?: () => void;
 }) {
-	const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
 	const navigate = useNavigate();
 	const role = useRole();
 	const [apiToken] = useApiToken();
 
 	const pages: Array<{ name: string; onClick: () => any; hidden?: boolean; Component?: React.FC }> =
 		[
-			{ name: 'Cars', onClick: () => navigate('temp-3') },
-			{ name: 'Reports', hidden: !role, onClick: () => {}, Component: ReportPopover },
+			{ name: 'User', onClick: () => navigate(appPaths.users) },
+			// { name: 'Reports', hidden: !role, onClick: () => {}, Component: ReportPopover },
 		];
-
-	const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
-		setAnchorElNav(event.currentTarget);
-	};
-	const handleCloseNavMenu = () => {
-		setAnchorElNav(null);
-	};
 
 	const { data: me } = useQuery([entities.me], UserService.getCurrent, {
 		onError: useSnackbarOnError(),
@@ -166,22 +161,9 @@ export default function AppHeader({
 
 					<MobilePagesWrapper>
 						{!hideNavigation && (
-							<>
-								<IconButton size='large' onClick={handleOpenNavMenu} color={'inherit'}>
-									<MenuIcon />
-								</IconButton>
-								<PagesMenu
-									anchorEl={anchorElNav}
-									open={Boolean(anchorElNav)}
-									onClose={handleCloseNavMenu}
-								>
-									{pages.map(page => (
-										<MenuItem key={page.name} onClick={page.onClick}>
-											<Typography textAlign='center'>{page.name}</Typography>
-										</MenuItem>
-									))}
-								</PagesMenu>
-							</>
+							<IconButton size='large' onClick={openSidebar} color={'inherit'}>
+								<MenuIcon />
+							</IconButton>
 						)}
 					</MobilePagesWrapper>
 					<MobileLogoWrapper>
