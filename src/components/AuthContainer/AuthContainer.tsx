@@ -8,7 +8,7 @@ type AuthContainerProps = {} & Omit<ComponentProps<'div'>, 'ref'>;
 
 const AuthContainer = ({ ...rest }: AuthContainerProps) => (
 	<Container>
-		<AppHeader hideNavigation />
+		<AppHeader hideNavigation hideUser />
 		<LayoutContainer>
 			<FormContainer>
 				<Outlet {...rest} />

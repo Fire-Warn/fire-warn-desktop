@@ -3,9 +3,11 @@
 /* tslint:disable */
 /* eslint-disable */
 
+import type { CommunityResponse } from './CommunityResponse';
+import type { RegionResponse } from './RegionResponse';
 import type { UserRole } from './UserRole';
 
-export type UserResponse = {
+export type UserListItemResponse = {
     id: number;
     email: string;
     firstName: string;
@@ -14,5 +16,7 @@ export type UserResponse = {
     phone: string;
     regionId: number;
     communityId: number;
+    community: CommunityResponse;
+    region: RegionResponse;
 };
 

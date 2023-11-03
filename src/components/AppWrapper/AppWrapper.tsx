@@ -36,7 +36,7 @@ const AppWrapper = ({ ...rest }: AuthContainerProps) => {
 		<>
 			{isLarge ? (
 				<Container>
-					<AppHeader hideNavigation hideUser />
+					<AppHeader />
 					<ContentLarge>
 						<ChildrenWrapperLarge style={{ gridArea: 'children' }}>
 							<Outlet {...rest} />
@@ -45,7 +45,7 @@ const AppWrapper = ({ ...rest }: AuthContainerProps) => {
 				</Container>
 			) : (
 				<Container>
-					<AppHeader hideNavigation hideUser />
+					<AppHeader hideUser openSidebar={() => setSidebarOpen(true)} />
 					<Content>
 						<Drawer variant='temporary' open={sidebarOpen} onClose={handleCloseSidebar}>
 							{/*<AppSidebar setSidebarOpen={setSidebarOpen} />*/}

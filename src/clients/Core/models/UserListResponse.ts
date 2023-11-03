@@ -3,12 +3,12 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import type { UserResponse } from './UserResponse';
+import type { UserListItemResponse } from './UserListItemResponse';
 
 export type UserListResponse = {
     page: number;
     rowsPerPage: number;
     total: number;
-    list: Array<UserResponse>;
+    list: Array<UserListItemResponse>;
 };
 

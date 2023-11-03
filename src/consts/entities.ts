@@ -5,4 +5,6 @@ export const entities = {
 
 	usersList: 'USERS_LIST',
 	me: 'ME',
+	regions: 'REGIONS_LIST',
+	communities: 'COMMUNITIES_LIST',
 };
