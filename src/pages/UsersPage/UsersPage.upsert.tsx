@@ -39,6 +39,7 @@ export default function UserUpsert({
 		RegionalAdmin: ['CommunityAdmin', 'Volunteer'],
 		CommunityAdmin: ['Volunteer'],
 		Volunteer: [],
+		Operator: [],
 	};
 
 	const { mutateAsync: createUser } = useMutation(
