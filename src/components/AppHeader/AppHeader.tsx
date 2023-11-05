@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { useQuery } from 'react-query';
+import { useTranslation } from 'react-i18next';
 import { Link, useNavigate } from 'react-router-dom';
 import AppBar from '@mui/material/AppBar';
 import IconButton from '@mui/material/IconButton';
@@ -17,7 +18,6 @@ import { UserService } from '../../clients/Core';
 import { useSnackbarOnError } from '../../hooks/notistack';
 import { useApiToken, useLogout } from '../../hooks/auth';
 import {
-	PagesMenu,
 	WToolbar,
 	PageButton,
 	SettingsMenu,
@@ -32,12 +32,12 @@ import {
 import { appPaths } from '../../app.routes';
 
 function AvatarPopover({ name }: { name: string }) {
+	const { t } = useTranslation('components', { keyPrefix: 'avatarPopover' });
 	const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
 	const logout = useLogout();
-	const navigate = useNavigate();
 	const settings: Array<{ name: string; onClick: () => any }> = [
 		{
-			name: 'Logout',
+			name: t('settings.logout'),
 			onClick: () => {
 				setAnchorElUser(null);
 				return logout();
@@ -136,13 +136,13 @@ export default function AppHeader({
 	hideNavigation?: boolean;
 	openSidebar?: () => void;
 }) {
+	const { t } = useTranslation('components', { keyPrefix: 'appHeader' });
 	const navigate = useNavigate();
-	const role = useRole();
 	const [apiToken] = useApiToken();
 
 	const pages: Array<{ name: string; onClick: () => any; hidden?: boolean; Component?: React.FC }> =
 		[
-			{ name: 'User', onClick: () => navigate(appPaths.users) },
+			{ name: t('pages.users'), onClick: () => navigate(appPaths.users) },
 			// { name: 'Reports', hidden: !role, onClick: () => {}, Component: ReportPopover },
 		];
 

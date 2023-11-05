@@ -1,4 +1,5 @@
 import { useState, ChangeEvent } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useMutation } from 'react-query';
 import { useNavigate } from 'react-router';
 import { generatePath } from 'react-router-dom';
@@ -17,6 +18,7 @@ import { useSnackbarOnError } from '../../hooks/notistack';
 import { appPaths } from '../../app.routes';
 
 function Login() {
+	const { t } = useTranslation('login');
 	const navigate = useNavigate();
 	const region: string = process.env.COGNITO_REGION || '';
 	const clientId: string = process.env.COGNITO_CLIENT_ID || '';
@@ -68,24 +70,24 @@ function Login() {
 	return (
 		<>
 			<Typography variant={'h3'} align={'center'}>
-				Sign In
+				{t('title')}
 			</Typography>
 			<AuthForm>
 				<WTextField
 					required
-					label={'Email'}
+					label={t('labels.email')}
 					value={email}
 					onChange={(e: ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
 				/>
 				<WTextField
 					required
 					type={'password'}
-					label={'Password'}
+					label={t('labels.password')}
 					value={password}
 					onChange={(e: ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
 				/>
 				<Button fullWidth disabled={isLoading} variant={'outlined'} onClick={() => signIn()}>
-					Sign In
+					{t('signIn')}
 				</Button>
 			</AuthForm>
 		</>
