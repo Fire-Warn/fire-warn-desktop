@@ -7,7 +7,8 @@
 	},
 	"appHeader": {
 		"pages": {
-			"users": "Користувачі"
+			"users": "Користувачі",
+			"incidents": "Інциденти"
 		}
 	}
 }

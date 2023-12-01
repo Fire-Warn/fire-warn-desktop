@@ -143,6 +143,7 @@ export default function AppHeader({
 	const pages: Array<{ name: string; onClick: () => any; hidden?: boolean; Component?: React.FC }> =
 		[
 			{ name: t('pages.users'), onClick: () => navigate(appPaths.users) },
+			{ name: t('pages.incidents'), onClick: () => navigate(appPaths.incidents) },
 			// { name: 'Reports', hidden: !role, onClick: () => {}, Component: ReportPopover },
 		];
 

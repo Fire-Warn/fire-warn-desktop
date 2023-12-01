@@ -46,6 +46,7 @@ export const WToolbar = styled(Toolbar)`
 
 export const PageButton = styled(Button)`
 	color: ${({ theme }) => theme.palette.primary.contrastText};
+	margin-right: 0.5rem;
 `;
 
 export const PagesWrapper = styled(Box).attrs({

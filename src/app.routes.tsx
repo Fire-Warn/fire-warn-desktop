@@ -18,6 +18,7 @@ interface RoutesConfig {
 }
 
 const LazyUsers = React.lazy(() => import('./pages/UsersPage'));
+const LazyIncidents = React.lazy(() => import('./pages/IncidentsPage'));
 const LazyLogin = React.lazy(() => import('./pages/Login'));
 const LazySetPassword = React.lazy(() => import('./pages/SetPassword'));
 // const LazyForgotPasswordReset = React.lazy(() => import('containers/ForgotPasswordReset'));
@@ -34,12 +35,13 @@ export const appPaths = {
 		},
 	},
 	users: 'users',
+	incidents: 'incidents',
 };
 
 const allRoutes: RoutesConfig[] = [
 	{
 		path: appPaths.auth.url,
-		allowedRoles: [NO_ROLE, 'Admin', 'RegionalAdmin', 'CommunityAdmin', 'Volunteer'],
+		allowedRoles: [NO_ROLE, 'Admin', 'RegionalAdmin', 'CommunityAdmin', 'Volunteer', 'Operator'],
 		element: <AuthContainer />,
 		children: [
 			{ path: appPaths.auth.children.login, element: <LazyLogin /> },
@@ -50,9 +52,20 @@ const allRoutes: RoutesConfig[] = [
 	},
 	{
 		path: '',
-		allowedRoles: ['Admin', 'RegionalAdmin', 'CommunityAdmin', 'Volunteer'],
+		allowedRoles: ['Admin', 'RegionalAdmin', 'CommunityAdmin', 'Volunteer', 'Operator'],
 		element: <AppWrapper />,
-		children: [{ path: appPaths.users, element: <LazyUsers /> }],
+		children: [
+			{
+				path: appPaths.users,
+				element: <LazyUsers />,
+				allowedRoles: ['Admin', 'RegionalAdmin', 'CommunityAdmin'],
+			},
+			{
+				path: appPaths.incidents,
+				element: <LazyIncidents />,
+				allowedRoles: ['Admin', 'RegionalAdmin', 'CommunityAdmin', 'Operator'],
+			},
+		],
 	},
 ];
 
@@ -61,6 +74,7 @@ export const homePaths: Record<UserRole | typeof NO_ROLE, string> = {
 	RegionalAdmin: appPaths.users,
 	CommunityAdmin: appPaths.users,
 	Volunteer: appPaths.users,
+	Operator: appPaths.incidents,
 	[NO_ROLE]: 'auth/login',
 };
 
