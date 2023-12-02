@@ -6,7 +6,8 @@ import enums from './locales/ua/enums.json';
 import components from './locales/ua/components.json';
 import login from './locales/ua/pages/auth/login.json';
 import usersPage from './locales/ua/pages/usersPage.json';
-import incidentsListPage from './locales/ua/pages/incidents/incidentsListPage.json';
+import incidentsListPage from './locales/ua/pages/incidents/list.json';
+import addIncidentPage from './locales/ua/pages/incidents/add.json';
 
 export enum Language {
 	UA = 'ua',
@@ -16,6 +17,7 @@ export const resources: Record<Language, any> = {
 	[Language.UA]: {
 		usersPage,
 		incidentsListPage,
+		addIncidentPage,
 		login,
 		enums,
 		components,

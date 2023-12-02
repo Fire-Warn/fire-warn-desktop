@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router';
 import { useQuery } from 'react-query';
 import { useTranslation } from 'react-i18next';
 import Typography from '@mui/material/Typography';
@@ -15,10 +16,14 @@ import { GridPaginationModel } from '@mui/x-data-grid/models/gridPaginationProps
 import { useSnackbarOnError } from '../../hooks/notistack';
 import { entities } from '../../consts/entities';
 import { IncidentListItemResponse, IncidentService } from '../../clients/Core';
+import { appPaths } from '../../app.routes';
+import { useRole } from '../../context/UserContext';
 
 function IncidentsPage() {
 	const { t } = useTranslation('incidentsListPage');
+	const navigate = useNavigate();
 	const theme = useTheme();
+	const role = useRole();
 	const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
 	const [paginationModel, setPaginationModel] = useState<GridPaginationModel>({
 		page: 0,
@@ -48,14 +53,16 @@ function IncidentsPage() {
 					direction={isSmallScreen ? 'column' : 'row'}
 				>
 					<Typography variant={'h4'}>{t('header')}</Typography>
-					<Button
-						fullWidth={isSmallScreen}
-						variant={'contained'}
-						onClick={() => console.log('adding new incident')}
-					>
-						<AddIcon />
-						<Typography ml={1}>{t('add')}</Typography>
-					</Button>
+					{role === 'Operator' && (
+						<Button
+							fullWidth={isSmallScreen}
+							variant={'contained'}
+							onClick={() => navigate(`/${appPaths.addIncident}`)}
+						>
+							<AddIcon />
+							<Typography ml={1}>{t('add')}</Typography>
+						</Button>
+					)}
 				</Grid>
 
 				{isIncidentsListLoading && <LinearProgress />}
