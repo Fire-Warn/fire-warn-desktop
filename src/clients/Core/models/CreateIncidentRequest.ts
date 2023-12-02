@@ -3,4 +3,8 @@
 /* tslint:disable */
 /* eslint-disable */
 
-export type UserRole = 'Admin' | 'RegionalAdmin' | 'CommunityAdmin' | 'Volunteer' | 'Operator';
+export type CreateIncidentRequest = {
+    address: string;
+    description: string;
+};
+

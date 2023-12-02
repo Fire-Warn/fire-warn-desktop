@@ -3,8 +3,10 @@ export const entities = {
 	accessToken: 'ACCESS_TOKEN',
 	contextUser: 'CONTEXT_USER',
 
-	usersList: 'USERS_LIST',
 	me: 'ME',
+
+	usersList: 'USERS_LIST',
+	incidentsList: 'INCIDENTS_LIST',
 	regions: 'REGIONS_LIST',
 	communities: 'COMMUNITIES_LIST',
 };

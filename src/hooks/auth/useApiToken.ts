@@ -19,7 +19,6 @@ export function useApiToken(): SharedStateReturn<null | ApiToken> {
 
 	if (apiToken) {
 		CoreOpenAPi.TOKEN = apiToken.AccessToken;
-		console.log({ token: CoreOpenAPi.TOKEN });
 	} else {
 		delete CoreOpenAPi.TOKEN;
 	}

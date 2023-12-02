@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router';
 import { useQuery } from 'react-query';
 import { useTranslation } from 'react-i18next';
 import Typography from '@mui/material/Typography';
@@ -14,24 +15,24 @@ import { GridPaginationModel } from '@mui/x-data-grid/models/gridPaginationProps
 
 import { useSnackbarOnError } from '../../hooks/notistack';
 import { entities } from '../../consts/entities';
-import { UserListItemResponse, UserRole, UserService } from '../../clients/Core';
-import UserUpsert from './UsersPage.upsert';
-import useTranslateEnum from '../../hooks/language/useTranslateEnum';
+import { IncidentListItemResponse, IncidentService } from '../../clients/Core';
+import { appPaths } from '../../app.routes';
+import { useRole } from '../../context/UserContext';
 
-function UsersPage() {
-	const { t } = useTranslation('usersPage');
-	const tEnum = useTranslateEnum<UserRole>({ keyPrefix: 'role' });
+function IncidentsPage() {
+	const { t } = useTranslation('incidentsListPage');
+	const navigate = useNavigate();
 	const theme = useTheme();
+	const role = useRole();
 	const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
-	const [isUserUpsertOpened, setIsUserUpsertOpened] = useState(false);
 	const [paginationModel, setPaginationModel] = useState<GridPaginationModel>({
 		page: 0,
 		pageSize: 10,
 	});
 
-	const { data: usersList, isLoading: isUsersListLoading } = useQuery(
-		[entities.usersList, paginationModel.page, paginationModel.pageSize],
-		() => UserService.getAllUsers(paginationModel.page, paginationModel.pageSize),
+	const { data: incidentsList, isLoading: isIncidentsListLoading } = useQuery(
+		[entities.incidentsList, paginationModel.page, paginationModel.pageSize],
+		() => IncidentService.getAllIncidents(paginationModel.page, paginationModel.pageSize),
 		{
 			onError: useSnackbarOnError(),
 		},
@@ -52,57 +53,46 @@ function UsersPage() {
 					direction={isSmallScreen ? 'column' : 'row'}
 				>
 					<Typography variant={'h4'}>{t('header')}</Typography>
-					<Button
-						fullWidth={isSmallScreen}
-						variant={'contained'}
-						onClick={() => setIsUserUpsertOpened(true)}
-					>
-						<AddIcon />
-						<Typography ml={1}>{t('add')}</Typography>
-					</Button>
+					{role === 'Operator' && (
+						<Button
+							fullWidth={isSmallScreen}
+							variant={'contained'}
+							onClick={() => navigate(`/${appPaths.addIncident}`)}
+						>
+							<AddIcon />
+							<Typography ml={1}>{t('add')}</Typography>
+						</Button>
+					)}
 				</Grid>
 
-				{isUsersListLoading && <LinearProgress />}
-				{usersList && (
+				{isIncidentsListLoading && <LinearProgress />}
+				{incidentsList?.list.length ? (
 					<DataGrid
 						localeText={ukUA.components.MuiDataGrid.defaultProps.localeText}
-						rows={usersList.list}
+						rows={incidentsList.list}
 						columns={[
 							{ field: 'id', headerName: t('columns.id'), width: 90 },
 							{
-								field: 'DOES NOT MATTER(1)',
-								headerName: t('columns.name'),
-								valueGetter: ({ row }: { row: UserListItemResponse }) =>
-									`${row.firstName} ${row.lastName}`,
-								minWidth: 250,
+								field: 'address',
+								headerName: t('columns.address'),
+								minWidth: 300,
 								flex: 1,
 							},
 							{
-								field: 'email',
-								headerName: t('columns.email'),
+								field: 'createdAt',
+								headerName: t('columns.createdAt'),
 								minWidth: 200,
 							},
 							{
-								field: 'phone',
-								headerName: t('columns.phone'),
-								minWidth: 150,
-							},
-							{
-								field: 'role',
-								headerName: t('columns.role'),
-								minWidth: 150,
-								valueGetter: ({ row }: { row: UserListItemResponse }) => tEnum(row.role),
-							},
-							{
-								field: 'DOES NOT MATTER(2)',
+								field: 'DOES NOT MATTER(1)',
 								headerName: t('columns.region'),
-								valueGetter: ({ row }: { row: UserListItemResponse }) => row.region.name,
+								valueGetter: ({ row }: { row: IncidentListItemResponse }) => row.region.name,
 								minWidth: 250,
 							},
 							{
-								field: 'DOES NOT MATTER(3)',
+								field: 'DOES NOT MATTER(2)',
 								headerName: t('columns.community'),
-								valueGetter: ({ row }: { row: UserListItemResponse }) => row.community.name,
+								valueGetter: ({ row }: { row: IncidentListItemResponse }) => row.community.name,
 								minWidth: 350,
 							},
 						].map(def => ({
@@ -111,7 +101,7 @@ function UsersPage() {
 							sortable: false,
 							disableColumnMenu: true,
 						}))}
-						rowCount={usersList.total}
+						rowCount={incidentsList.total}
 						paginationModel={paginationModel}
 						onPaginationModelChange={setPaginationModel}
 						pageSizeOptions={[5, 10]}
@@ -119,11 +109,14 @@ function UsersPage() {
 						disableRowSelectionOnClick
 						paginationMode='server'
 					/>
+				) : (
+					<Typography align={'center'} variant={'h6'} mt={5}>
+						{t('empty')}
+					</Typography>
 				)}
 			</Container>
-			<UserUpsert isOpened={isUserUpsertOpened} onClose={() => setIsUserUpsertOpened(false)} />
 		</>
 	);
 }
 
-export default UsersPage;
+export default IncidentsPage;

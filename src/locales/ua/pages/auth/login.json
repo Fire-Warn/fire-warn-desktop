@@ -1,0 +1,6 @@
+{
+	"title": "Логін ",
+	"labels": { "email": "Пошта", "password": "Пароль" },
+	"signIn": "Вхід",
+	"forgotPassword": "Забули пароль?"
+}
