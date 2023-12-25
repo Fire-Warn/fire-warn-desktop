@@ -6,5 +6,6 @@
 export type CreateIncidentRequest = {
     address: string;
     description: string;
+    communityId: number;
 };
 

@@ -13,6 +13,7 @@ export type UserResponse = {
     role: UserRole;
     phone: string;
     regionId: number;
-    communityId: number;
+    districtId: number | null;
+    communityId: number | null;
 };
 

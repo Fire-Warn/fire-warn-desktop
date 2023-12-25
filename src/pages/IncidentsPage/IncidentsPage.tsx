@@ -91,6 +91,12 @@ function IncidentsPage() {
 							},
 							{
 								field: 'DOES NOT MATTER(2)',
+								headerName: t('columns.district'),
+								valueGetter: ({ row }: { row: IncidentListItemResponse }) => row.district.name,
+								minWidth: 250,
+							},
+							{
+								field: 'DOES NOT MATTER(3)',
 								headerName: t('columns.community'),
 								valueGetter: ({ row }: { row: IncidentListItemResponse }) => row.community.name,
 								minWidth: 350,

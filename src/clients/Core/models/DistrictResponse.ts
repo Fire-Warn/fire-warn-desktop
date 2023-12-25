@@ -3,10 +3,9 @@
 /* tslint:disable */
 /* eslint-disable */
 
-export type CommunityResponse = {
+export type DistrictResponse = {
     name: string;
     regionId: number;
-    districtId: number;
     id: number;
 };
 

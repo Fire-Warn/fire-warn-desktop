@@ -8,5 +8,6 @@ export const entities = {
 	usersList: 'USERS_LIST',
 	incidentsList: 'INCIDENTS_LIST',
 	regions: 'REGIONS_LIST',
+	districts: 'DISTRICTS_LIST',
 	communities: 'COMMUNITIES_LIST',
 };

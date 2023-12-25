@@ -101,8 +101,14 @@ function UsersPage() {
 							},
 							{
 								field: 'DOES NOT MATTER(3)',
+								headerName: t('columns.district'),
+								valueGetter: ({ row }: { row: UserListItemResponse }) => row.district?.name || '-',
+								minWidth: 350,
+							},
+							{
+								field: 'DOES NOT MATTER(4)',
 								headerName: t('columns.community'),
-								valueGetter: ({ row }: { row: UserListItemResponse }) => row.community.name,
+								valueGetter: ({ row }: { row: UserListItemResponse }) => row.community?.name || '-',
 								minWidth: 350,
 							},
 						].map(def => ({

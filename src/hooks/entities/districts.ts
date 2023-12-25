@@ -1,16 +1,16 @@
 import { useQuery } from 'react-query';
 
 import { entities } from '../../consts/entities';
-import { CommunityResponse, LocalityService } from '../../clients/Core';
+import { DistrictResponse, LocalityService } from '../../clients/Core';
 import { useSnackbarOnError } from '../notistack';
 
-export function useRegionCommunities(regionId: number): {
-	communities: Array<CommunityResponse> | undefined;
+export function useDistricts(regionId: number): {
+	districts: Array<DistrictResponse> | undefined;
 	isLoading: boolean;
 } {
 	const { data: response, isLoading } = useQuery(
-		[entities.communities, regionId],
-		() => LocalityService.getRegionCommunities(regionId),
+		[entities.districts],
+		() => LocalityService.getRegionDistricts(regionId),
 		{
 			onError: useSnackbarOnError(),
 			enabled: !!regionId,
@@ -18,7 +18,7 @@ export function useRegionCommunities(regionId: number): {
 	);
 
 	return {
-		communities: response?.list,
+		districts: response?.list,
 		isLoading,
 	};
 }

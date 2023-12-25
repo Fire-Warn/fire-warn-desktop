@@ -11,20 +11,29 @@ import Button from '@mui/material/Button';
 import { IncidentService } from '../../clients/Core';
 import { entities } from '../../consts/entities';
 import { appPaths } from '../../app.routes';
+import { useUser } from '../../context/UserContext';
+import { useCommunities } from '../../hooks/entities/communities';
+import { WTextField } from '../UsersPage/UsersPage.styles';
+import Autocomplete from '@mui/material/Autocomplete';
 
 function AddIncidentPage() {
 	const { t } = useTranslation('addIncidentPage');
 	const queryClient = useQueryClient();
 	const navigate = useNavigate();
 
+	const user = useUser();
+	const { communities, isLoading } = useCommunities({ districtId: user?.districtId || undefined });
+
 	const [address, setAddress] = useState('');
 	const [description, setDescription] = useState('');
+	const [communityId, setCommunityId] = useState(0);
 
 	const { mutate: createIncident, isLoading: isCreateIncidentLoading } = useMutation(
 		() =>
 			IncidentService.createIncident({
 				address,
 				description,
+				communityId,
 			}),
 		{
 			onSuccess: () =>
@@ -38,6 +47,21 @@ function AddIncidentPage() {
 		<Container>
 			<Typography variant={'h5'}>{t('header')}</Typography>
 			<Grid container direction={'column'} spacing={2} mt={4}>
+				<Grid item>
+					<Autocomplete
+						value={communityId}
+						onChange={(e, communityId) => {
+							setCommunityId(communityId);
+						}}
+						disableClearable
+						// @ts-ignore
+						renderInput={props => <WTextField label={t('community')} {...props} />}
+						getOptionLabel={(communityId: number) =>
+							communities?.find(c => c.id === communityId)?.name || ''
+						}
+						options={communities?.map(community => community.id) || []}
+					/>
+				</Grid>
 				<Grid item>
 					<TextField
 						fullWidth

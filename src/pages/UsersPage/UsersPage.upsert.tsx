@@ -1,4 +1,4 @@
-import { Dispatch, useState } from 'react';
+import { Dispatch, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useMutation, useQueryClient } from 'react-query';
 import Typography from '@mui/material/Typography';
@@ -12,7 +12,8 @@ import { entities } from '../../consts/entities';
 import { useRole } from '../../context/UserContext';
 import { WTextField } from './UsersPage.styles';
 import { useRegions } from '../../hooks/entities/regions';
-import { useRegionCommunities } from '../../hooks/entities/regionCommunities';
+import { useDistricts } from '../../hooks/entities/districts';
+import { useCommunities } from '../../hooks/entities/communities';
 import useTranslateEnum from '../../hooks/language/useTranslateEnum';
 
 export default function UserUpsert({
@@ -31,10 +32,12 @@ export default function UserUpsert({
 	const [lastName, setLastName] = useState('');
 	const [role, setRole] = useState<UserRole>('Volunteer');
 	const [regionId, setRegionId] = useState<number>(0);
+	const [districtId, setDistrictId] = useState<number>(0);
 	const [communityId, setCommunityId] = useState<number>(0);
 
 	const { regions, isLoading: isRegionsLoading } = useRegions();
-	const { communities, isLoading: isCommunitiesLoading } = useRegionCommunities(regionId);
+	const { districts, isLoading: isDistrictsLoading } = useDistricts(regionId);
+	const { communities, isLoading: isCommunitiesLoading } = useCommunities({ districtId });
 	const queryClient = useQueryClient();
 	const confirmDialog = useConfirmDialog();
 	const currentUserRole = useRole();
@@ -56,6 +59,7 @@ export default function UserUpsert({
 				lastName,
 				role,
 				regionId,
+				districtId,
 				communityId,
 			}),
 		{
@@ -82,6 +86,15 @@ export default function UserUpsert({
 		},
 	);
 
+	useEffect(() => {
+		setRegionId(0);
+		setDistrictId(0);
+		setCommunityId(0);
+	}, [role, setDistrictId]);
+	useEffect(() => setDistrictId(0), [regionId, setDistrictId]);
+	useEffect(() => setCommunityId(0), [districtId, setCommunityId]);
+
+	// @ts-ignore
 	return (
 		<FormDialog
 			acceptText={t('confirm')}
@@ -90,7 +103,15 @@ export default function UserUpsert({
 			onClose={onClose}
 			submittedCb={() => createUser()}
 			confirmDisabled={
-				!email || !phone || !firstName || !lastName || !role || !regionId || !communityId
+				!email ||
+				!phone ||
+				!firstName ||
+				!lastName ||
+				!role ||
+				(['RegionalAdmin', 'CommunityAdmin', 'Volunteer', 'Operator'].includes(role) &&
+					!regionId) ||
+				(['CommunityAdmin', 'Volunteer', 'Operator'].includes(role) && !districtId) ||
+				(['CommunityAdmin', 'Volunteer'].includes(role) && !communityId)
 			}
 		>
 			<WTextField
@@ -119,33 +140,56 @@ export default function UserUpsert({
 					setRole(role);
 				}}
 				disableClearable
+				// @ts-ignore
 				renderInput={props => <WTextField label={t('role')} {...props} />}
 				getOptionLabel={(role: UserRole) => tEnum(role)}
 				options={rolesAllowedToCreate[currentUserRole as UserRole]}
 			/>
-			<Autocomplete
-				value={regionId}
-				onChange={(e, regionId) => {
-					setRegionId(regionId);
-				}}
-				disableClearable
-				renderInput={props => <WTextField label={t('region')} {...props} />}
-				getOptionLabel={(regionId: number) => regions?.find(r => r.id === regionId)?.name || ''}
-				options={regions?.map(region => region.id) || []}
-			/>
-			<Autocomplete
-				value={communityId}
-				onChange={(e, communityId) => {
-					setCommunityId(communityId);
-				}}
-				disableClearable
-				disabled={!regionId || !communities?.length || isCommunitiesLoading}
-				renderInput={props => <WTextField label={t('community')} {...props} />}
-				getOptionLabel={(communityId: number) =>
-					communities?.find(c => c.id === communityId)?.name || ''
-				}
-				options={communities?.map(community => community.id) || []}
-			/>
+			{['RegionalAdmin', 'CommunityAdmin', 'Volunteer', 'Operator'].includes(role) && (
+				<Autocomplete
+					value={regionId}
+					onChange={(e, regionId) => {
+						setRegionId(regionId);
+					}}
+					disableClearable
+					// @ts-ignore
+					renderInput={props => <WTextField label={t('region')} {...props} />}
+					getOptionLabel={(regionId: number) => regions?.find(r => r.id === regionId)?.name || ''}
+					options={regions?.map(region => region.id) || []}
+				/>
+			)}
+			{['CommunityAdmin', 'Volunteer', 'Operator'].includes(role) && (
+				<Autocomplete
+					value={districtId}
+					onChange={(e, districtId) => {
+						setDistrictId(districtId);
+					}}
+					disableClearable
+					disabled={!regionId || !districts?.length || isDistrictsLoading}
+					// @ts-ignore
+					renderInput={props => <WTextField label={t('district')} {...props} />}
+					getOptionLabel={(districtId: number) =>
+						districts?.find(c => c.id === districtId)?.name || ''
+					}
+					options={districts?.map(district => district.id) || []}
+				/>
+			)}
+			{['CommunityAdmin', 'Volunteer'].includes(role) && (
+				<Autocomplete
+					value={communityId}
+					onChange={(e, communityId) => {
+						setCommunityId(communityId);
+					}}
+					disableClearable
+					disabled={!regionId || !communities?.length || isCommunitiesLoading}
+					// @ts-ignore
+					renderInput={props => <WTextField label={t('community')} {...props} />}
+					getOptionLabel={(communityId: number) =>
+						communities?.find(c => c.id === communityId)?.name || ''
+					}
+					options={communities?.map(community => community.id) || []}
+				/>
+			)}
 		</FormDialog>
 	);
 }

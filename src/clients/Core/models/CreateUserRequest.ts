@@ -12,6 +12,7 @@ export type CreateUserRequest = {
     phone: string;
     role: UserRole;
     regionId: number;
-    communityId: number;
+    districtId?: number;
+    communityId?: number;
 };
 

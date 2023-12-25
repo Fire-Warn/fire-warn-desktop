@@ -138,11 +138,16 @@ export default function AppHeader({
 }) {
 	const { t } = useTranslation('components', { keyPrefix: 'appHeader' });
 	const navigate = useNavigate();
+	const role = useRole();
 	const [apiToken] = useApiToken();
 
 	const pages: Array<{ name: string; onClick: () => any; hidden?: boolean; Component?: React.FC }> =
 		[
-			{ name: t('pages.users'), onClick: () => navigate(appPaths.users) },
+			{
+				name: t('pages.users'),
+				onClick: () => navigate(appPaths.users),
+				hidden: !['Admin', 'RegionalAdmin', 'CommunityAdmin'].includes(role as string),
+			},
 			{ name: t('pages.incidents'), onClick: () => navigate(appPaths.incidents) },
 			// { name: 'Reports', hidden: !role, onClick: () => {}, Component: ReportPopover },
 		];
@@ -173,16 +178,18 @@ export default function AppHeader({
 
 					{!hideNavigation && (
 						<PagesWrapper>
-							{pages.map(page => {
-								const Component = page.Component;
-								return Component ? (
-									<Component key={page.name} />
-								) : (
-									<PageButton key={page.name} onClick={page.onClick}>
-										{page.name}
-									</PageButton>
-								);
-							})}
+							{pages
+								.filter(page => !page.hidden)
+								.map(page => {
+									const Component = page.Component;
+									return Component ? (
+										<Component key={page.name} />
+									) : (
+										<PageButton key={page.name} onClick={page.onClick}>
+											{page.name}
+										</PageButton>
+									);
+								})}
 						</PagesWrapper>
 					)}
 

@@ -3,10 +3,9 @@
 /* tslint:disable */
 /* eslint-disable */
 
-export type CommunityResponse = {
-    name: string;
-    regionId: number;
-    districtId: number;
-    id: number;
+import type { DistrictResponse } from './DistrictResponse';
+
+export type DistrictListResponse = {
+    list: Array<DistrictResponse>;
 };
 

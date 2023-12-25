@@ -8,13 +8,8 @@
 		"phone": "Номер телефону",
 		"role": "Роль",
 		"region": "Область",
+		"district": "Район",
 		"community": "Громада"
-	},
-	"successDialog": {
-		"title": "Користувача створено!",
-		"description1": "Новий користувач {{firstName}} {{lastName}} створений",
-		"description2": "Користувач отримає дані для входу на свою пошту",
-		"confirmText": "Ок"
 	},
 	"userUpsert": {
 		"title": "Додати користувача",
@@ -24,7 +19,14 @@
 		"lastName": "Прізвище*",
 		"role": "Роль*",
 		"region": "Область",
+		"district": "Район",
 		"community": "Громада",
-		"confirm": "Створити"
+		"confirm": "Створити",
+		"successDialog": {
+			"title": "Користувача створено!",
+			"description1": "Новий користувач {{firstName}} {{lastName}} створений",
+			"description2": "Користувач отримає дані для входу на свою пошту",
+			"confirmText": "Ок"
+		}
 	}
 }

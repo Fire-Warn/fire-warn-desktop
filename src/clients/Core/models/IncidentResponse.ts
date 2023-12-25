@@ -7,6 +7,7 @@ export type IncidentResponse = {
     address: string;
     description: string;
     regionId: number;
+    districtId: number;
     communityId: number;
     id: number;
     createdAt: string;
