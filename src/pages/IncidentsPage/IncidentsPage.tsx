@@ -10,7 +10,7 @@ import LinearProgress from '@mui/material/LinearProgress';
 import AddIcon from '@mui/icons-material/Add';
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import { DataGrid, ukUA } from '@mui/x-data-grid';
+import { DataGrid, GridRenderCellParams, ukUA } from '@mui/x-data-grid';
 import { GridPaginationModel } from '@mui/x-data-grid/models/gridPaginationProps';
 
 import { useSnackbarOnError } from '../../hooks/notistack';
@@ -100,6 +100,24 @@ function IncidentsPage() {
 								headerName: t('columns.community'),
 								valueGetter: ({ row }: { row: IncidentListItemResponse }) => row.community.name,
 								minWidth: 350,
+							},
+							{
+								field: 'DOES NOT MATTER(4)',
+								headerName: '',
+								renderCell: (params: GridRenderCellParams) => (
+									<Button
+										variant={'contained'}
+										fullWidth
+										onClick={event => {
+											event.stopPropagation();
+											navigate(`/${appPaths.incidents}/${params.id}/`);
+										}}
+									>
+										{t('view')}
+									</Button>
+								),
+								// rend: ({ row }: { row: IncidentListItemResponse }) => row.community.name,
+								minWidth: 150,
 							},
 						].map(def => ({
 							...def,

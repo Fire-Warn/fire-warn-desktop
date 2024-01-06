@@ -1,0 +1,10 @@
+{
+  "header": "Деталі інциденту",
+  "region": "Область: {{region}}",
+  "district": "Район: {{district}}",
+  "community": "Громада: {{community}}",
+  "address": "Адреса: {{address}}",
+  "description": "Опис: {{description}}",
+  "acceptedIncident": "Прийняли інцидент: {{acceptedIncident}}",
+  "notAcceptedIncident": "Не прийняли інцидент: {{notAcceptedIncident}}"
+}

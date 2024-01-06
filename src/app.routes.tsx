@@ -22,6 +22,7 @@ const LazyIncidentsPage = React.lazy(() => import('./pages/IncidentsPage'));
 const LazyAddIncidentPage = React.lazy(() => import('./pages/AddIncidentPage'));
 const LazyLoginPage = React.lazy(() => import('./pages/Login'));
 const LazySetPasswordPage = React.lazy(() => import('./pages/SetPassword'));
+const LazyIncidentDetailsPage = React.lazy(() => import('./pages/IncidentDetailsPage'));
 // const LazyForgotPasswordReset = React.lazy(() => import('containers/ForgotPasswordReset'));
 // const LazyForgotPasswordEmail = React.lazy(() => import('containers/ForgotPasswordEmail'));
 
@@ -61,6 +62,11 @@ const allRoutes: RoutesConfig[] = [
 				path: appPaths.users,
 				element: <LazyUsersPage />,
 				allowedRoles: ['Admin', 'RegionalAdmin', 'CommunityAdmin'],
+			},
+			{
+				path: `${appPaths.incidents}/:incidentId`,
+				allowedRoles: ['Admin', 'RegionalAdmin', 'CommunityAdmin', 'Operator'],
+				element: <LazyIncidentDetailsPage />,
 			},
 			{
 				path: appPaths.incidents,

@@ -4,6 +4,7 @@ export const entities = {
 	contextUser: 'CONTEXT_USER',
 
 	me: 'ME',
+	incident: 'INCIDENT',
 
 	usersList: 'USERS_LIST',
 	incidentsList: 'INCIDENTS_LIST',

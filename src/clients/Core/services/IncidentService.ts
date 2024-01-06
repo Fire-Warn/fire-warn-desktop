@@ -3,6 +3,7 @@
 /* tslint:disable */
 /* eslint-disable */
 import type { CreateIncidentRequest } from '../models/CreateIncidentRequest';
+import type { IncidentDetailsResponse } from '../models/IncidentDetailsResponse';
 import type { IncidentListResponse } from '../models/IncidentListResponse';
 import type { IncidentResponse } from '../models/IncidentResponse';
 
@@ -56,6 +57,26 @@ export class IncidentService {
                 'order': order,
                 'orderBy': orderBy,
                 'filters': filters,
+            },
+            errors: {
+                401: `Unauthorized`,
+            },
+        });
+    }
+
+    /**
+     * @param id
+     * @returns IncidentDetailsResponse
+     * @throws ApiError
+     */
+    public static getIncidentDetails(
+        id: number,
+    ): CancelablePromise<IncidentDetailsResponse> {
+        return __request(OpenAPI, {
+            method: 'GET',
+            url: '/incidents/{id}',
+            path: {
+                'id': id,
             },
             errors: {
                 401: `Unauthorized`,
