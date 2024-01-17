@@ -31,12 +31,23 @@ i18n
 	.use(LanguageDetector)
 	.init({
 		lng: Language.UA,
-		ns: ['login', 'usersPage', 'enums', 'components'],
+		supportedLngs: [Language.UA],
+		fallbackLng: Language.UA,
+		ns: [
+			'login',
+			'usersPage',
+			'enums',
+			'components',
+			'incidentsListPage',
+			'addIncidentPage',
+			'incidentDetailsPage',
+		],
 		interpolation: {
 			escapeValue: false,
 		},
 		react: {
 			transSupportBasicHtmlNodes: true,
+			nsMode: 'default',
 		},
 		resources,
 	});

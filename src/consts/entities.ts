@@ -5,6 +5,7 @@ export const entities = {
 
 	me: 'ME',
 	incident: 'INCIDENT',
+	communityLatLng: 'COMMUNITY_LAT_LNG',
 
 	usersList: 'USERS_LIST',
 	incidentsList: 'INCIDENTS_LIST',

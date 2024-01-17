@@ -3,7 +3,8 @@
   "region": "Область",
   "district": "Район",
   "community": "Громада",
-  "address": "Адреса",
+  "address": "Місцезнаходження (не вводити якщо обираєте координати)",
   "description": "Опис",
-  "create": "Створити"
+  "create": "Створити",
+  "coordinatesAddress": "Адреса за координатами: {{lat}}; {{lng}}"
 }

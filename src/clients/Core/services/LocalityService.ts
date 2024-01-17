@@ -4,6 +4,7 @@
 /* eslint-disable */
 import type { CommunityListResponse } from '../models/CommunityListResponse';
 import type { DistrictListResponse } from '../models/DistrictListResponse';
+import type { NullableLatLngResponse } from '../models/NullableLatLngResponse';
 import type { RegionListResponse } from '../models/RegionListResponse';
 
 import type { CancelablePromise } from '../core/CancelablePromise';
@@ -51,6 +52,23 @@ export class LocalityService {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/locality/regions/{id}/communities',
+            path: {
+                'id': id,
+            },
+        });
+    }
+
+    /**
+     * @param id
+     * @returns NullableLatLngResponse
+     * @throws ApiError
+     */
+    public static getCommunityLatLng(
+        id: number,
+    ): CancelablePromise<NullableLatLngResponse> {
+        return __request(OpenAPI, {
+            method: 'GET',
+            url: '/locality/communities/{id}/lat-lng',
             path: {
                 'id': id,
             },
