@@ -17,6 +17,7 @@ export type { IncidentDetailsResponse } from './models/IncidentDetailsResponse';
 export type { IncidentListItemResponse } from './models/IncidentListItemResponse';
 export type { IncidentListResponse } from './models/IncidentListResponse';
 export type { IncidentResponse } from './models/IncidentResponse';
+export type { LatLngRequest } from './models/LatLngRequest';
 export type { LatLngResponse } from './models/LatLngResponse';
 export type { NullableLatLngResponse } from './models/NullableLatLngResponse';
 export type { RegionListResponse } from './models/RegionListResponse';

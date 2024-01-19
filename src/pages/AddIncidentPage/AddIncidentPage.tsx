@@ -41,6 +41,7 @@ function AddIncidentPage() {
 				address,
 				description,
 				communityId,
+				geo: marker && { lat: marker.lat(), lng: marker.lng() },
 			}),
 		{
 			onError: useSnackbarOnError(),
@@ -109,7 +110,12 @@ function AddIncidentPage() {
 							restrictions={{ country: 'UA' }}
 							onLoad={autocomplete => setAutocomplete(autocomplete)}
 						>
-							<TextField label={t('address')} fullWidth />
+							<TextField
+								label={t('address')}
+								value={address}
+								onChange={e => setAddress(e.target.value)}
+								fullWidth
+							/>
 						</GmAutocomplete>
 					)}
 				</Grid>
@@ -117,8 +123,8 @@ function AddIncidentPage() {
 					<Grid item>
 						<Typography>
 							{t('coordinatesAddress', {
-								lat: marker.lat().toString(),
-								lng: marker.lng().toString(),
+								lat: marker.lat().toFixed(5),
+								lng: marker.lng().toFixed(5),
 							})}
 						</Typography>
 					</Grid>
@@ -127,8 +133,15 @@ function AddIncidentPage() {
 					<Map
 						setMap={setMap}
 						onMapClick={latLng => {
-							setMarker(latLng);
-							setAddress('');
+							if (latLng) {
+								setMarker(latLng);
+								setAddress(
+									t('coordinatesAddress', {
+										lat: latLng.lat().toString(),
+										lng: latLng.lng().toString(),
+									}),
+								);
+							}
 						}}
 						marker={marker}
 					/>
