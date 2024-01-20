@@ -1,0 +1,10 @@
+{
+  "header": "Додати новий інцидент",
+  "region": "Область",
+  "district": "Район",
+  "community": "Громада",
+  "address": "Місцезнаходження",
+  "description": "Опис",
+  "create": "Створити",
+  "coordinatesAddress": "Адреса за координатами: {{lat}}; {{lng}}"
+}

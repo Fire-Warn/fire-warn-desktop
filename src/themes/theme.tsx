@@ -5,14 +5,14 @@ import { shadows } from './shadows';
 
 export const colors = {
 	strokes: '#B3B3B3',
-	lightPrimary: '#EEF4F5',
-	lightSecondary: '#FFEFE7',
+	// lightPrimary: '#EEF4F5',
+	// lightSecondary: '#FFEFE7',
 };
 
 const themeOptions: ThemeOptions = {
 	palette: {
-		primary: { main: '#0A6672', contrastText: '#ffffff' },
-		secondary: { main: '#FF5D00', contrastText: '#ffffff' },
+		primary: { main: '#e74c3c', contrastText: '#ffffff' },
+		secondary: { main: '#3498db', contrastText: '#ffffff' },
 		background: { default: '#f4f5f7', paper: '#ffffff' },
 		text: { primary: '#253858', secondary: '#68758B' },
 		action: { active: '#6b778c' },

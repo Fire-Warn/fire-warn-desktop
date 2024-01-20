@@ -1,0 +1,32 @@
+{
+	"header": "Користувачі",
+	"add": "Додати користувача",
+	"columns": {
+		"id": "ID",
+		"name": "Ім'я",
+		"email": "Пошта",
+		"phone": "Номер телефону",
+		"role": "Роль",
+		"region": "Область",
+		"district": "Район",
+		"community": "Громада"
+	},
+	"userUpsert": {
+		"title": "Додати користувача",
+		"email": "Пошта*",
+		"phoneNumber": "Номер телефону*",
+		"firstName": "Ім'я*",
+		"lastName": "Прізвище*",
+		"role": "Роль*",
+		"region": "Область",
+		"district": "Район",
+		"community": "Громада",
+		"confirm": "Створити",
+		"successDialog": {
+			"title": "Користувача створено!",
+			"description1": "Новий користувач {{firstName}} {{lastName}} створений",
+			"description2": "Користувач отримає дані для входу на свою пошту",
+			"confirmText": "Ок"
+		}
+	}
+}

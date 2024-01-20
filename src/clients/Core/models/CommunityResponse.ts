@@ -6,6 +6,7 @@
 export type CommunityResponse = {
     name: string;
     regionId: number;
+    districtId: number;
     id: number;
 };
 

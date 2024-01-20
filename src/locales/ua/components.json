@@ -1,0 +1,14 @@
+{
+	"formDialog": { "cancelText": "Скасувати" },
+	"avatarPopover": {
+		"settings": {
+			"logout": "Вийти з системи"
+		}
+	},
+	"appHeader": {
+		"pages": {
+			"users": "Користувачі",
+			"incidents": "Інциденти"
+		}
+	}
+}

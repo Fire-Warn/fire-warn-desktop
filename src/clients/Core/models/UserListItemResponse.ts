@@ -4,6 +4,7 @@
 /* eslint-disable */
 
 import type { CommunityResponse } from './CommunityResponse';
+import type { DistrictResponse } from './DistrictResponse';
 import type { RegionResponse } from './RegionResponse';
 import type { UserRole } from './UserRole';
 
@@ -15,8 +16,10 @@ export type UserListItemResponse = {
     role: UserRole;
     phone: string;
     regionId: number;
-    communityId: number;
-    community: CommunityResponse;
+    districtId: number | null;
+    communityId: number | null;
+    community: CommunityResponse | null;
+    district: DistrictResponse | null;
     region: RegionResponse;
 };
 
