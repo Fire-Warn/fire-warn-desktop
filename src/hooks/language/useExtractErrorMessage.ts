@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
 
-import { ApiError } from 'hooks/notistack/useSnackbarOnError';
+import { ApiError } from '../notistack/useSnackbarOnError';
 import { useCallback } from 'react';
 
 const TRANSLATION_NOT_FOUND = 'TRANSLATION_NOT_FOUND';

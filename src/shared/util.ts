@@ -1,3 +1,4 @@
+// @ts-ignore
 import crypto from 'crypto-browserify';
 
 export const hashCognitoSecret = (clientSecret: string, username: string, clientId: string) => {

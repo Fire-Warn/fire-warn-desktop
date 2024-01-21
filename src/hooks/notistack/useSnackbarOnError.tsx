@@ -12,16 +12,21 @@ export type ApiErrorBody = {
 };
 
 export type ApiError = {
-	body: string;
+	body: ApiErrorBody;
 };
 
 export function extractErrorMessage(error: ApiError | Error) {
 	let message = '';
 	try {
-		const apiErrorBody = (error as ApiError)?.body;
-		const apiError = apiErrorBody ? (JSON.parse(apiErrorBody) as ApiErrorBody)?.message : undefined;
+		const apiError = (error as ApiError)?.body;
+		if (apiError?.statusCode === 500) {
+			return 'Something went wrong. Please, contact administrator.';
+		}
+
 		message = (
-			Array.isArray(apiError) ? apiError.join('') : apiError || (error as Error).message
+			Array.isArray(apiError?.message)
+				? apiError?.message.join('')
+				: apiError?.message || (error as Error).message
 		) as string;
 	} catch {
 		/* received error has an unsupported type, and we'll use default message */

@@ -16,7 +16,7 @@ export function useAutoTokenRefresh() {
 
 	useEffect(() => {
 		const originalFetch = global.fetch;
-		global.fetch = async (input: string, config?: RequestInit): Promise<Response> => {
+		global.fetch = async (input: any, config?: RequestInit): Promise<Response> => {
 			const response = await originalFetch(input, config);
 
 			let newAuthToken: ApiToken | null = null;

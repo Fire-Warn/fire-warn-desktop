@@ -4,7 +4,10 @@ import { useLocation, useNavigate, Location } from 'react-router';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
-import { CognitoIdentityProvider } from '@aws-sdk/client-cognito-identity-provider';
+import {
+	ChallengeNameType,
+	CognitoIdentityProvider,
+} from '@aws-sdk/client-cognito-identity-provider';
 
 import { WTextField } from '../Login/Login.styles';
 import { useApiToken } from '../../hooks/auth';
@@ -28,7 +31,7 @@ function SetPassword() {
 	const { mutate: setCognitoPassword, isLoading } = useMutation(
 		() => {
 			const params = {
-				ChallengeName: 'NEW_PASSWORD_REQUIRED',
+				ChallengeName: 'NEW_PASSWORD_REQUIRED' as ChallengeNameType,
 				ClientId: clientId,
 				ChallengeResponses: {
 					USERNAME: email,
