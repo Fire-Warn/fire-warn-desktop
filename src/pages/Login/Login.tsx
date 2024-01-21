@@ -20,9 +20,9 @@ import { appPaths } from '../../app.routes';
 function Login() {
 	const { t } = useTranslation('login');
 	const navigate = useNavigate();
-	const region: string = process.env.COGNITO_REGION || '';
-	const clientId: string = process.env.COGNITO_CLIENT_ID || '';
-	const clientSecret: string = process.env.COGNITO_CLIENT_SECRET || '';
+	const region: string = window.env.COGNITO_REGION || '';
+	const clientId: string = window.env.COGNITO_CLIENT_ID || '';
+	const clientSecret: string = window.env.COGNITO_CLIENT_SECRET || '';
 	const provider = new CognitoIdentityProvider({ region });
 
 	const [email, setEmail] = useState('');

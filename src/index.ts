@@ -5,6 +5,19 @@ import { app, BrowserWindow } from 'electron';
 declare const MAIN_WINDOW_WEBPACK_ENTRY: string;
 declare const MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY: string;
 
+declare global {
+	interface Window {
+		env: {
+			APP_CORE_URL: string;
+			COGNITO_REGION: string;
+			COGNITO_CLIENT_ID: string;
+			COGNITO_CLIENT_SECRET: string;
+			GOOGLE_API_KEY: string;
+			NODE_ENV: string;
+		};
+	}
+}
+
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require('electron-squirrel-startup')) {
 	app.quit();
@@ -17,6 +30,7 @@ const createWindow = (): void => {
 		width: 1800,
 		minWidth: 1800,
 		minHeight: 1000,
+		fullscreenable: true,
 		webPreferences: {
 			preload: MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY,
 			nodeIntegration: true,

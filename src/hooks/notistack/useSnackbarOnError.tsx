@@ -37,7 +37,7 @@ export function useSnackbarOnError(ignoredErrorCode?: number) {
 
 	return useCallback(
 		(error: any) => {
-			if (process.env.NODE_ENV === 'development') {
+			if (window.env.NODE_ENV === 'development') {
 				console.error(error);
 			}
 			if (!ignoredErrorCode || !error?.status || ignoredErrorCode !== error?.status) {

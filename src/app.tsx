@@ -16,12 +16,12 @@ import { AppRoutes } from './app.routes';
 import i18n from './i18n';
 
 function render() {
-	const container = document.getElementById('app');
+	const container = document.getElementById('app') as HTMLElement;
 	const root = createRoot(container); // createRoot(container!) if you use TypeScript
 	root.render(<App />);
 }
 
-CoreOpenAPi.BASE = process.env.APP_CORE_URL;
+CoreOpenAPi.BASE = window.env.APP_CORE_URL;
 
 function App() {
 	const queryClient = new QueryClient();

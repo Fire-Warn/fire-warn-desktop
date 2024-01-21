@@ -20,7 +20,7 @@ const Map = ({
 }) => {
 	const { i18n } = useTranslation();
 	const { isLoaded } = useLoadScript({
-		googleMapsApiKey: process.env.GOOGLE_API_KEY as string,
+		googleMapsApiKey: window.env.GOOGLE_API_KEY as string,
 		libraries,
 		language: googleMapLanguages[i18n.language as Language],
 	});

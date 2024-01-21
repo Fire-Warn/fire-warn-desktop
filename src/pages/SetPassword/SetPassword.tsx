@@ -17,9 +17,9 @@ function SetPassword() {
 		state: { email, session },
 	} = useLocation() as Location<{ email: string; session: string }>;
 
-	const region: string = process.env.COGNITO_REGION || '';
-	const clientId: string = process.env.COGNITO_CLIENT_ID || '';
-	const clientSecret: string = process.env.COGNITO_CLIENT_SECRET || '';
+	const region: string = window.env.COGNITO_REGION || '';
+	const clientId: string = window.env.COGNITO_CLIENT_ID || '';
+	const clientSecret: string = window.env.COGNITO_CLIENT_SECRET || '';
 	const provider = new CognitoIdentityProvider({ region });
 
 	const [password, setPassword] = useState('');
