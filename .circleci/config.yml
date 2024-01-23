@@ -37,6 +37,7 @@ jobs:
     steps:
       - run: sudo apt-get update
       - install
+      - run: yarn package
       - run: ls
       - run: electron-builder -l --publish always
       - store_artifacts:
