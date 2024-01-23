@@ -6,8 +6,10 @@ orbs:
 commands:
   install:
     steps:
+      - run: git config --global core.autocrlf input
       - node/install:
           node-version: '18.18'
+      - checkout
       - run: yarn
 
 jobs:
