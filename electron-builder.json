@@ -1,0 +1,20 @@
+{
+  "appId": "fire-warn",
+  "productName": "Fire Warn",
+  "copyright": "Copyright © Everget",
+  "directories": {
+    "output": "release/"
+  },
+  "publish": {
+    "provider": "s3",
+    "bucket": "fire-warn.desktop.packages",
+    "region": "eu-central-1"
+  },
+  "icon": "./src/assets/1910x1910.png",
+  "win": {
+    "target": "nsis"
+  },
+  "linux": {
+    "target": ["AppImage", "deb", "rpm"]
+  }
+}

@@ -1,0 +1,62 @@
+version: 2.1
+
+orbs:
+  node: electronjs/node@2.2.0
+
+commands:
+  install:
+    steps:
+      - node/install:
+          node-version: '18.18'
+      - run: yarn
+
+jobs:
+  win-build:
+    executor: node/windows
+    environment:
+      AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
+      AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
+    steps:
+      - install
+      - run:
+          name: Publish windows build
+          shell: powershell.exe
+          command: electron-builder -w --publish always
+      - store_artifacts:
+          path: release
+      - persist_to_workspace:
+          root: .
+          paths:
+            - release
+  linux-build:
+    executor: node/linux
+    resource_class: medium+
+    steps:
+      - run: sudo apt-get update
+      - install
+      - run: electron-builder -l --publish always
+      - store_artifacts:
+          path: release
+      - persist_to_workspace:
+          root: .
+          paths:
+            - release
+workflows:
+  build:
+    jobs:
+      - win-build:
+          filters:
+            tags:
+              only:
+                - /^v.*/
+            branches:
+              only:
+                - main
+      - linux-build:
+          filters:
+            tags:
+              only:
+                - /^v.*/
+            branches:
+              only:
+                - main
