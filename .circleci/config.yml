@@ -9,6 +9,7 @@ commands:
       - run: git config --global core.autocrlf input
       - node/install:
           node-version: '18.18'
+      - run: npm i -g electron-builder
       - checkout
       - run: yarn
 
