@@ -14,36 +14,32 @@ commands:
       - run: yarn
 
 jobs:
-#  win-build:
-#    executor: node/windows
-#    environment:
-#      AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
-#      AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
-#    steps:
-#      - install
-#      - run:
-#          name: Publish windows build
-#          shell: powershell.exe
-#          command: electron-builder -w --publish always
-#      - store_artifacts:
-#          path: release
-#      - persist_to_workspace:
-#          root: .
-#          paths:
-#            - release
+  win-build:
+    executor: node/windows
+    environment:
+      AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
+      AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
+    steps:
+      - install
+      - run: yarn package
+      - run:
+          name: Publish windows build
+          shell: powershell.exe
+          command: electron-builder -w --publish always
+      - store_artifacts:
+          path: release
+      - persist_to_workspace:
+          root: .
+          paths:
+            - release
   linux-build:
     executor: node/linux
     resource_class: medium
-#    environment:
-#      AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
-#      AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
     steps:
       - run: sudo apt-get update
       - install
       - run: sudo apt-get install rpm
       - run: yarn package
-      - run: ls
-      - run: echo ${AWS_ACCESS_KEY_ID}
       - run: electron-builder -l --publish always
       - store_artifacts:
           path: release
@@ -54,14 +50,14 @@ jobs:
 workflows:
   build:
     jobs:
-#      - win-build:
-#          filters:
-#            tags:
-#              only:
-#                - /^v.*/
-#            branches:
-#              only:
-#                - main
+      - win-build:
+          filters:
+            tags:
+              only:
+                - /^v.*/
+            branches:
+              only:
+                - main
       - linux-build:
           filters:
             tags:
