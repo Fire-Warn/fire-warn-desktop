@@ -22,7 +22,7 @@ jobs:
     steps:
       - add_ssh_keys:
           fingerprints:
-            - "XX:XX:XX:XX"
+            - "SHA256:Cz2UeeGYuXjPYtKwu0WN5wXaqAqiRukIVsVNquSBHmM"
       - install
       - run: yarn package
       - run:
