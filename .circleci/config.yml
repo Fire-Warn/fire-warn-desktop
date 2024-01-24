@@ -16,9 +16,6 @@ commands:
 jobs:
   win-build:
     executor: node/windows
-    environment:
-      AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
-      AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
     steps:
       - add_ssh_keys:
           fingerprints:
