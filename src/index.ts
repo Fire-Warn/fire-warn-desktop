@@ -31,6 +31,7 @@ const createWindow = (): void => {
 		minWidth: 1800,
 		minHeight: 1000,
 		fullscreenable: true,
+		autoHideMenuBar: true,
 		webPreferences: {
 			preload: MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY,
 			nodeIntegration: true,
