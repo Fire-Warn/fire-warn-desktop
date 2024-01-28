@@ -56,7 +56,7 @@ workflows:
                 - /^v.*/
             branches:
               only:
-                - mockup-branch
+                - main
       - linux-build:
           filters:
             tags:
