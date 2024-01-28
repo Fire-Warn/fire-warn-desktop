@@ -1,7 +1,7 @@
 {
   "name": "fire-warn-desktop",
   "productName": "fire-warn-desktop",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "My Electron application description",
   "homepage": "https://github.com/Fire-Warn/fire-warn-desktop",
   "main": ".webpack/main",
