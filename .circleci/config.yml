@@ -40,12 +40,12 @@ jobs:
       - run: sudo apt-get install rpm
       - run: yarn package
       - run: electron-builder -l --publish always
-      - store_artifacts:
-          path: release
-      - persist_to_workspace:
-          root: .
-          paths:
-            - release
+#      - store_artifacts:
+#          path: release
+#      - persist_to_workspace:
+#          root: .
+#          paths:
+#            - release
 workflows:
   build:
     jobs:
@@ -56,7 +56,7 @@ workflows:
                 - /^v.*/
             branches:
               only:
-                - main
+                - mockup-branch
       - linux-build:
           filters:
             tags:
