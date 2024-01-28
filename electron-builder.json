@@ -12,7 +12,7 @@
   },
   "icon": "src/assets/icon.png",
   "win": {
-    "icon": "src/assets/icon.ico",
+    "icon": "build/icon.ico",
     "target": "nsis"
   },
   "linux": {
