@@ -1,5 +1,5 @@
 import { createRoot } from 'react-dom/client';
-import { BrowserRouter } from 'react-router-dom';
+import { HashRouter } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { I18nextProvider } from 'react-i18next';
 import MuiStylesProvider from '@mui/styles/StylesProvider';
@@ -27,7 +27,7 @@ function App() {
 	const queryClient = new QueryClient();
 
 	return (
-		<BrowserRouter>
+		<HashRouter>
 			<I18nextProvider i18n={i18n}>
 				<QueryClientProvider client={queryClient}>
 					<StyledThemeProvider theme={theme}>
@@ -46,7 +46,7 @@ function App() {
 					</StyledThemeProvider>
 				</QueryClientProvider>
 			</I18nextProvider>
-		</BrowserRouter>
+		</HashRouter>
 	);
 }
 
