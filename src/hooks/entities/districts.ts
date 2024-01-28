@@ -9,7 +9,7 @@ export function useDistricts(regionId: number): {
 	isLoading: boolean;
 } {
 	const { data: response, isLoading } = useQuery(
-		[entities.districts],
+		[entities.districts, regionId],
 		() => LocalityService.getRegionDistricts(regionId),
 		{
 			onError: useSnackbarOnError(),
