@@ -13,7 +13,7 @@ const themeOptions: ThemeOptions = {
 	palette: {
 		primary: { main: '#1fa893', contrastText: '#ffffff' }, // #e74c3c
 		secondary: { main: '#3498db', contrastText: '#ffffff' },
-		background: { default: '#99bfff', paper: '#ffffff' }, // #f4f5f7
+		background: { default: '#f4f5f7', paper: '#ffffff' }, // #f4f5f7
 		text: { primary: '#253858', secondary: '#68758B' },
 		action: { active: '#6b778c' },
 		success: { main: '#237680', contrastText: '#ffffff', light: '#EDF7ED' },

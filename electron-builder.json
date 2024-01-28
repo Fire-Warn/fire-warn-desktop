@@ -16,7 +16,8 @@
     "target": "nsis"
   },
   "linux": {
-    "icon": "src/assets/icon.png",
+    "category": "Office",
+    "icon": "build/icon/",
     "target": ["AppImage", "deb", "rpm"]
   }
 }
