@@ -8,6 +8,7 @@ declare const MAIN_WINDOW_WEBPACK_ENTRY: string;
 declare const MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY: string;
 
 autoUpdater.logger = log;
+(autoUpdater.logger as any).transports.file.level = 'info';
 
 declare global {
 	interface Window {
