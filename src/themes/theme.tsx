@@ -11,7 +11,7 @@ export const colors = {
 
 const themeOptions: ThemeOptions = {
 	palette: {
-		primary: { main: '#e74c3c', contrastText: '#ffffff' },
+		primary: { main: '#1fa893', contrastText: '#ffffff' }, // #e74c3c
 		secondary: { main: '#3498db', contrastText: '#ffffff' },
 		background: { default: '#f4f5f7', paper: '#ffffff' },
 		text: { primary: '#253858', secondary: '#68758B' },
