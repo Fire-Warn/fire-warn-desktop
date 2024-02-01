@@ -10,7 +10,7 @@ import { UserRole, UserService } from '../../clients/Core';
 import { useSnackbarOnError } from '../../hooks/notistack';
 import { entities } from '../../consts/entities';
 import { useRole } from '../../context/UserContext';
-import { WTextField } from './UsersPage.styles';
+import { WTextField, WPhoneInput } from './UsersPage.styles';
 import { useRegions } from '../../hooks/entities/regions';
 import { useDistricts } from '../../hooks/entities/districts';
 import { useCommunities } from '../../hooks/entities/communities';
@@ -119,10 +119,13 @@ export default function UserUpsert({
 				label={t('email')}
 				onChange={(e: any) => setEmail(e.target.value)}
 			/>
-			<WTextField
+			<WPhoneInput
 				value={phone}
 				label={t('phoneNumber')}
-				onChange={(e: any) => setPhone(e.target.value)}
+				defaultCountry='UA'
+				onlyCountries={['UA']}
+				disableDropdown
+				onChange={(newPhoneNumber: string) => setPhone(newPhoneNumber)}
 			/>
 			<WTextField
 				value={firstName}
